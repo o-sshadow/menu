@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4;
+            background-color: #000; /* Black background */
             margin: 0;
             padding: 20px;
-            color: #333;
+            color: #fff; /* Default text color */
         }
         h1 {
             text-align: center;
             color: #007BFF;
+            font-weight: bold; /* Bold text for the title */
         }
         div {
             margin-bottom: 20px;
@@ -23,6 +25,7 @@
         label {
             margin-right: 10px;
             font-weight: bold;
+            color: #fff; /* White color for labels */
         }
         input[type="text"], select {
             padding: 10px;
@@ -40,16 +43,17 @@
         }
         .category {
             padding: 10px;
-            border: 1px solid #007BFF;
             border-radius: 5px;
-            background-color: #fff;
+            background: linear-gradient(to bottom, #f0f0f0, #d9d9d9); /* Gradient background */
             cursor: pointer;
             transition: background-color 0.3s, box-shadow 0.3s;
             text-align: center;
-            flex: 1 1 150px; 
+            flex: 1 1 150px; /* Adjusts the size of the category boxes */
+            font-weight: bold; /* Bold text for categories */
+            color: black; /* Black text for categories */
         }
         .category:hover {
-            background-color: #e7f1ff;
+            background: linear-gradient(to bottom, #e0e0e0, #c9c9c9); /* Darker gradient on hover */
             box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
         }
         #gameList {
@@ -62,15 +66,15 @@
             display: block;
             padding: 10px;
             text-decoration: none;
-            color: #007BFF;
-            background-color: #fff;
+            color: black; /* Black text for games */
+            background: linear-gradient(to bottom, #f0f0f0, #d9d9d9); /* Gradient background */
             border-radius: 5px;
-            width: 150px; 
+            width: 150px; /* Fixed width for game boxes */
             text-align: center;
             transition: background-color 0.3s, box-shadow 0.3s;
         }
         #gameList a:hover {
-            background-color: #e7f1ff;
+            background: linear-gradient(to bottom, #e0e0e0, #c9c9c9); /* Darker gradient on hover */
             box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
             text-decoration: none;
         }
@@ -110,7 +114,7 @@
 
 <script>
     const games = [
-        { name: "1v1.LOL ", url: "1v1.lol", category : "Shooting" },
+        { name: "1v1.LOL", url: "1v1.lol", category: "Shooting" },
         { name: "10 Minutes Till Dawn", url: "10minutestilldawn", category: "Survival" },
         { name: "2048", url: "2048", category: "Puzzle" },
         { name: "A Dance of Fire And Ice", url: "adanceoffireandice", category: "Rhythm" },
@@ -153,7 +157,7 @@
         { name: "Konnekt", url: "konnekt", category: "Puzzle" },
         { name: "Minecraft 0.30", url: "minecraft0.30", category: "Sandbox" },
         { name: "Minecraft 1.3", url: "minecraft1.3", category: "Sandbox" },
-        { name: "Minecraft  1.5.2", url: "minecraft1.5.2", category : "Sandbox" },
+        { name: "Minecraft 1.5.2", url: "minecraft1.5.2", category: "Sandbox" },
         { name: "Moto X3M 2", url: "motox3m2", category: "Racing" },
         { name: "OvO", url: "ovo", category: "Platformer" },
         { name: "Pac-Man", url: "pacman", category: "Arcade" },
@@ -190,7 +194,7 @@
         { name: "Webretro (retro console emulator)", url: "webretro", category: "Emulator" },
         { name: "World's Hardest Game", url: "worldshardestgame", category: "Puzzle" },
         { name: "World's Hardest Game 2", url: "worldshardestgame2", category: "Puzzle" },
-        { name: "xx142-b2.exe", url: "xx142b2.exe", category: "Executable" },
+        { name: "xx142-b2.exe", url: "xx142b2 .exe", category: "Executable" },
     ];
 
     function filterGames() {
