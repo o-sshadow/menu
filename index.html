@@ -2,261 +2,238 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="The Best website for unblocked games!">
-    <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,tyler's game hub,tyler's unblocked games,tyler's games unblocked">
-    <meta name="author" content="Tyler Palko">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyler's Game Hub</title>
-    <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
-    <link rel="stylesheet" href="style.css" />
+    <title>Game Menu</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
             margin: 0;
-            padding: 0;
-            color: #000;
-        }
-
-        .heading {
-            text-align: center;
             padding: 20px;
-            background-color: #003366;
-            color: #fff;
+            color: #333;
         }
-
         h1 {
-            margin: 0;
-            font-size: 2.5rem;
+            text-align: center;
+            color: #007BFF;
         }
-
         div {
-            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
             padding: 10px;
-        }
-
-        a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            color: #000;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border: 2px solid #003366;
+            margin-right: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            transition: all 0.3s ease;
+            font-size: 16px;
         }
-
-        a:hover {
-            color: #fff;
-            background-color: #00509e;
-            box-shadow: 0 0 10px 2px #00d9ff;
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            padding: 20px;
-            background-color: #003366;
-            color: #fff;
-        }
-
-        footer a {
-            color: #00d9ff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        p {
-            text-align: center;
-            font-size: 1.2rem;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background-color: #003366;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 1000;
-            width: calc(100% - 20px);
-            max-width: 200px;
-        }
-
-        .back-button:hover {
-            background-color: #00509e;
-        }
-
-        .controls {
+        #categoryContainer {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
+            flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
         }
-
-        .controls select, .controls input {
+        .category {
             padding: 10px;
-            font-size: 1rem;
-            border: 2px solid #003366;
+            border: 1px solid #007BFF;
             border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            text-align: center;
+            flex: 1 1 150px; 
         }
-
-        .game-list {
+        .category:hover {
+            background-color: #e7f1ff;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+        #gameList {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
         }
-
-        .game-list a {
-            flex: 1 1 calc(20% - 20px);
-            box-sizing: border-box;
+        #gameList a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #007BFF;
+            background-color: #fff;
+            border-radius: 5px;
+            width: 150px; 
+            text-align: center;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
-
-        @media (max-width: 768px) {
-            .game-list a {
-                flex: 1 1 calc(45% - 20px);
-            }
+        #gameList a:hover {
+            background-color: #e7f1ff;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+            text-decoration: none;
         }
-
-        @media (max-width: 480px) {
-            .game-list a {
-                flex: 1 1 calc(90% - 20px);
-            }
+        #gameList p {
+            color: #999;
+            text-align: center;
+            width: 100%;
         }
     </style>
-    <script>
-        const games = [
-            "1v1.LOL",
-            "10 Minutes Till Dawn",
-            "2048",
-            "A Dance of Fire And Ice",
-            "A Dark Room",
-            "Adrenaline Challenge",
-            "Adventure Drivers",
-            "Asteroids",
-            "Astray",
-            "Backcountry",
-            "Bad Ice Cream",
-            "Bad Ice Cream 2",
-            "Bad Ice Cream 3",
-            "Basket Random",
-            "BitLife",
-            "Bounceback",
-            "Boxing Random",
-            "BreakLock",
-            "Breakout",
-            "Chess",
-            "Chrome Dino",
-            "Connect 3",
-            "Cookie Clicker",
-            "Cubefield",
-            "Doodle Jump",
-            "Duck Life",
-            "Duck Life 2",
-            "Duck Life 3",
-            "Duck Life 4",
-            "Edge Surf",
-            "Evil Glitch",
-            "Factory Balls Forever",
-            "Fireboy and Watergirl in the Forest Temple",
-            "Flappy Bird",
-            "Friendly Fire",
-            "Geometry Dash",
-            "Gopher Kart",
-            "Hextris",
-            "Ice Age Baby Adventure",
-            "Jumping Frogs Puzzle",
-            "Konnekt",
-            "Minecraft 0.30",
-            "Minecraft 1.3",
-            "Minecraft 1.5.2",
-            "Moto X3M 2",
-            "OvO",
-            "Pac-Man",
-            "Pushback",
-            "Racer",
-            "Radius Raid",
-            "Retro Bowl",
-            "Retrohaunt",
-            "Riddle School",
-            "Riddle School 2",
-            "Riddle School 3",
-            "Riddle School 4",
-            "Riddle School 5",
-            "Roadblocks",
-            "Sleeping Beauty",
-            "Slope",
-            "Snake",
-            "Snow Rider 3D",
-            "Soccer Random",
-            "Space Company",
-            "Space Invaders",
-            "Tetris",
-            "The Chroma Incident",
-            "THERE IS NO GAME!",
-            "Tower Master",
-            "Tunnel Rush",
-            "Under Run",
-            "Vex 3",
-            "Vex 4",
-            "Vex 5",
-            "Vex 6",
-            "Vex 7",
-            "Volley Random",
-            "Webretro",
-            "World's Hardest Game",
-            "World's Hardest Game 2",
-            "xx142-b2.exe"
-        ];
-
-        function displayGames() {
-            const gameContainer = document.getElementById('gameList');
-            gameContainer.innerHTML = '';
-
-            games.forEach(game => {
-                const gameLink = document.createElement('a');
-                gameLink.href = game.toLowerCase().replace(/[^a-z0-9]+/g, '');
-                gameLink.textContent = game;
-                gameContainer.appendChild(gameLink);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            displayGames();
-        });
-    </script>
 </head>
 <body>
-    <button class="back-button" onclick="location.href='https://o-sshadow.github.io/menu/'">Back</button>
-    <div class="heading">
-        <h1>Tyler's Game Hub</h1>
-    </div>
+<h1>Game Menu</h1>
+<div>
+    <label for="searchBar">Search: </label>
+    <input type="text" id="searchBar" placeholder="Type to search...">
+</div>
+<div id="categoryContainer">
+    <div class="category" data-value="All">All</div>
+    <div class="category" data-value="Shooting">Shooting</div>
+    <div class="category" data-value="Survival">Survival</div>
+    <div class="category" data-value="Puzzle">Puzzle</div>
+    <div class="category" data-value="Rhythm">Rhythm</div>
+    <div class="category" data-value="Adventure">Adventure</div>
+    <div class="category" data-value="Action">Action</div>
+    <div class="category" data-value="Racing">Racing</div>
+    <div class="category" data-value="Arcade">Arcade</div>
+    <div class="category" data-value="Strategy">Strategy</div>
+    <div class="category" data-value="Endless Runner">Endless Runner</div>
+    <div class="category" data-value="Idle">Idle</div>
+    <div class="category" data-value="Simulation">Simulation</div>
+    <div class="category" data-value="Co-op">Co-op</div>
+    <div class="category" data-value="Horror">Horror</div>
+    <div class="category" data-value="Emulator">Emulator</div>
+    <div class="category" data-value="Executable">Executable</div>
+</div>
+<div id="gameList"></div>
 
-    <div class="controls">
-        <input type="text" id="searchBar" placeholder="Search games..." oninput="displayGames()">
-    </div>
+<script>
+    const games = [
+        { name: "1v1.LOL ", url: "1v1.lol", category : "Shooting" },
+        { name: "10 Minutes Till Dawn", url: "10minutestilldawn", category: "Survival" },
+        { name: "2048", url: "2048", category: "Puzzle" },
+        { name: "A Dance of Fire And Ice", url: "adanceoffireandice", category: "Rhythm" },
+        { name: "A Dark Room", url: "adarkroom", category: "Adventure" },
+        { name: "Adrenaline Challenge", url: "adrenalinechallenge", category: "Action" },
+        { name: "Adventure Drivers", url: "adventuredrivers", category: "Racing" },
+        { name: "Asteroids", url: "asteroids", category: "Arcade" },
+        { name: "Astray", url: "astray", category: "Adventure" },
+        { name: "Backcountry", url: "backcountry", category: "Adventure" },
+        { name: "Bad Ice Cream", url: "badicecream", category: "Puzzle" },
+        { name: "Bad Ice Cream 2", url: "badicecream2", category: "Puzzle" },
+        { name: "Bad Ice Cream 3", url: "badicecream3", category: "Puzzle" },
+        { name: "Basket Random", url: "basketrandom", category: "Sports" },
+        { name: "BitLife", url: "bitlife", category: "Simulation" },
+        { name: "Bounceback", url: "bounceback", category: "Action" },
+        { name: "Boxing Random", url: "boxingrandom", category: "Sports" },
+        { name: "BreakLock", url: "breaklock", category: "Puzzle" },
+        { name: "Breakout", url: "breakout", category: "Arcade" },
+        { name: "Chess", url: "chess", category: "Strategy" },
+        { name: "Chrome Dino", url: "chromedino", category: "Endless Runner" },
+        { name: "Connect 3", url: "connect3", category: "Puzzle" },
+        { name: "Cookie Clicker", url: "cookieclicker", category: "Idle" },
+        { name: "Cubefield", url: "cubefield", category: "Arcade" },
+        { name: "Doodle Jump", url: "doodlejump", category: "Platformer" },
+        { name: "Duck Life", url: "ducklife", category: "Simulation" },
+        { name: "Duck Life 2", url: "ducklife2", category: "Simulation" },
+        { name: "Duck Life 3", url: "ducklife3", category: "Simulation" },
+        { name: "Duck Life 4", url: "ducklife4", category: "Simulation" },
+        { name: "Edge Surf", url: "edgesurf", category: "Endless Runner" },
+        { name: "Evil Glitch", url: "evilglitch", category: "Puzzle" },
+        { name: "Factory Balls Forever", url: "factoryballsforever", category: "Puzzle" },
+        { name: "Fireboy and Watergirl in the Forest Temple", url: "fireboyandwatergirlintheforesttemple", category: "Co-op" },
+        { name: "Flappy Bird", url: "flappybird", category: "Endless Runner" },
+        { name: "Friendly Fire", url: "friendlyfire", category: "Action" },
+        { name: "Geometry Dash", url: "geometrydash", category: "Platformer" },
+        { name: "Gopher Kart", url: "gopherkart", category: "Racing" },
+        { name: "Hextris", url: "hextris", category: "Puzzle" },
+        { name: "Ice Age Baby Adventure", url: "iceagebabyadventure", category: "Adventure" },
+        { name: "Jumping Frogs Puzzle", url: "jumpingfrogspuzzle", category: "Puzzle" },
+        { name: "Konnekt", url: "konnekt", category: "Puzzle" },
+        { name: "Minecraft 0.30", url: "minecraft0.30", category: "Sandbox" },
+        { name: "Minecraft 1.3", url: "minecraft1.3", category: "Sandbox" },
+        { name: "Minecraft  1.5.2", url: "minecraft1.5.2", category : "Sandbox" },
+        { name: "Moto X3M 2", url: "motox3m2", category: "Racing" },
+        { name: "OvO", url: "ovo", category: "Platformer" },
+        { name: "Pac-Man", url: "pacman", category: "Arcade" },
+        { name: "Pushback", url: "pushback", category: "Action" },
+        { name: "Racer", url: "racer", category: "Racing" },
+        { name: "Radius Raid", url: "radiusraid", category: "Action" },
+        { name: "Retro Bowl", url: "retrobowl", category: "Sports" },
+        { name: "Retrohaunt", url: "retrohaunt", category: "Horror" },
+        { name: "Riddle School", url: "riddleschool", category: "Puzzle" },
+        { name: "Riddle School 2", url: "riddleschool2", category: "Puzzle" },
+        { name: "Riddle School 3", url: "riddleschool3", category: "Puzzle" },
+        { name: "Riddle School 4", url: "riddleschool4", category: "Puzzle" },
+        { name: "Riddle School 5", url: "riddleschool5", category: "Puzzle" },
+        { name: "Roadblocks", url: "roadblocks", category: "Puzzle" },
+        { name: "Sleeping Beauty", url: "sleepingbeauty", category: "Adventure" },
+        { name: "Slope", url: "slope", category: "Racing" },
+        { name: "Snake", url: "snake", category: "Arcade" },
+        { name: "Snow Rider 3D", url: "snowrider3d", category: "Racing" },
+        { name: "Soccer Random", url: "soccerrandom", category: "Sports" },
+        { name: "Space Company", url: "spacecompany", category: "Simulation" },
+        { name: "Space Invaders", url: "spaceinvaders", category: "Arcade" },
+        { name: "Tetris", url: "tetris", category: "Puzzle" },
+        { name: "The Chroma Incident", url: "thechromaincident", category: "Adventure" },
+        { name: "THERE IS NO GAME!", url: "thereisnogame", category: "Adventure" },
+        { name: "Tower Master", url: "towermaster", category: "Strategy" },
+        { name: "Tunnel Rush", url: "tunnelrush", category: "Endless Runner" },
+        { name: "Under Run", url: "underrun", category: "Action" },
+        { name: "Vex 3", url: "vex3", category: "Platformer" },
+        { name: "Vex 4", url: "vex4", category: "Platformer" },
+        { name: "Vex 5", url: "vex5", category: "Platformer" },
+        { name: "Vex 6", url: "vex6", category: "Platformer" },
+        { name: "Vex 7", url: "vex7", category: "Platformer" },
+        { name: "Volley Random", url: "volleyrandom", category: "Sports" },
+        { name: "Webretro (retro console emulator)", url: "webretro", category: "Emulator" },
+        { name: "World's Hardest Game", url: "worldshardestgame", category: "Puzzle" },
+        { name: "World's Hardest Game 2", url: "worldshardestgame2", category: "Puzzle" },
+        { name: "xx142-b2.exe", url: "xx142b2.exe", category: "Executable" },
+    ];
 
-    <div id="gameList" class="game-list"></div>
+    function filterGames() {
+        const category = document.querySelector('.category.selected')?.dataset.value || "All";
+        const searchQuery = document.getElementById('searchBar').value.toLowerCase();
 
-    <footer>
-        <div class="footer">
-            <a href="https://github.com/TylerPalko/gamehub">Source Code</a>
-            <a href="https://www.youtube.com/channel/UC8Sz_LcrkLErkxXbWKlW59A">My Youtube</a>
-            <a href="bitcoin:bc1q5072l0wec75kvatudg3qh8zxk40dmem0d0zu0kzszemxc87qqv9s9z608y">Donate BTC</a>
-        </div>
-    </footer>
+        const filteredGames = games.filter(game => {
+            const matchesCategory = category === "All" || game.category === category;
+            const matchesSearch = game.name.toLowerCase().includes(searchQuery);
+            return matchesCategory && matchesSearch;
+        });
+
+        displayGames(filteredGames);
+    }
+
+    function displayGames(gameList) {
+        const gameContainer = document.getElementById('gameList');
+        gameContainer.innerHTML = '';
+
+        if (gameList.length === 0) {
+            gameContainer.innerHTML = '<p>No games found.</p>';
+            return;
+        }
+
+        gameList.forEach(game => {
+            const gameLink = document.createElement('a');
+            gameLink.href = game.url;
+            gameLink.textContent = game.name;
+            gameContainer.appendChild(gameLink);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        displayGames(games);
+        document.querySelectorAll('.category').forEach(category => {
+            category.addEventListener('click', function() {
+                document.querySelectorAll('.category').forEach(cat => cat.classList.remove('selected'));
+                this.classList.add('selected');
+                filterGames();
+            });
+        });
+        document.getElementById('searchBar').addEventListener('input', filterGames);
+    });
+</script>
 </body>
 </html>
