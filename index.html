@@ -2,9 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="The Best website for unblocked games!">
-    <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,tyler's game hub,tyler's unblocked games,tyler's games unblocked">
-    <meta name="author" content="Tyler Palko">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Menu</title>
     <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
@@ -53,6 +50,9 @@
         }
 
         footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
             text-align: center;
             padding: 20px;
             background-color: #003366;
@@ -73,11 +73,32 @@
             text-align: center;
             font-size: 1.2rem;
         }
+
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+            width: calc(100% - 20px);
+            max-width: 200px;
+        }
+
+        .back-button:hover {
+            background-color: #00509e;
+        }
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="location.href='https://o-sshadow.github.io/menu/'">Back</button>
     <div class="heading">
-        <h1>Menu</h1>
+        <h1>Game Menu</h1>
     </div>
     <div>
         <a href="1">1</a>
