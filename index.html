@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="The Best website for unblocked games!">
+    <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,tyler's game hub,tyler's unblocked games,tyler's games unblocked">
+    <meta name="author" content="Tyler Palko">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Menu</title>
+    <title>Tyler's Game Hub</title>
     <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+    <link rel="stylesheet" href="style.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -93,100 +97,165 @@
         .back-button:hover {
             background-color: #00509e;
         }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .controls select, .controls input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #003366;
+            border-radius: 5px;
+        }
+
+        .game-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .game-list a {
+            flex: 1 1 calc(20% - 20px);
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .game-list a {
+                flex: 1 1 calc(45% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-list a {
+                flex: 1 1 calc(90% - 20px);
+            }
+        }
     </style>
+    <script>
+        const games = [
+            "1v1.LOL",
+            "10 Minutes Till Dawn",
+            "2048",
+            "A Dance of Fire And Ice",
+            "A Dark Room",
+            "Adrenaline Challenge",
+            "Adventure Drivers",
+            "Asteroids",
+            "Astray",
+            "Backcountry",
+            "Bad Ice Cream",
+            "Bad Ice Cream 2",
+            "Bad Ice Cream 3",
+            "Basket Random",
+            "BitLife",
+            "Bounceback",
+            "Boxing Random",
+            "BreakLock",
+            "Breakout",
+            "Chess",
+            "Chrome Dino",
+            "Connect 3",
+            "Cookie Clicker",
+            "Cubefield",
+            "Doodle Jump",
+            "Duck Life",
+            "Duck Life 2",
+            "Duck Life 3",
+            "Duck Life 4",
+            "Edge Surf",
+            "Evil Glitch",
+            "Factory Balls Forever",
+            "Fireboy and Watergirl in the Forest Temple",
+            "Flappy Bird",
+            "Friendly Fire",
+            "Geometry Dash",
+            "Gopher Kart",
+            "Hextris",
+            "Ice Age Baby Adventure",
+            "Jumping Frogs Puzzle",
+            "Konnekt",
+            "Minecraft 0.30",
+            "Minecraft 1.3",
+            "Minecraft 1.5.2",
+            "Moto X3M 2",
+            "OvO",
+            "Pac-Man",
+            "Pushback",
+            "Racer",
+            "Radius Raid",
+            "Retro Bowl",
+            "Retrohaunt",
+            "Riddle School",
+            "Riddle School 2",
+            "Riddle School 3",
+            "Riddle School 4",
+            "Riddle School 5",
+            "Roadblocks",
+            "Sleeping Beauty",
+            "Slope",
+            "Snake",
+            "Snow Rider 3D",
+            "Soccer Random",
+            "Space Company",
+            "Space Invaders",
+            "Tetris",
+            "The Chroma Incident",
+            "THERE IS NO GAME!",
+            "Tower Master",
+            "Tunnel Rush",
+            "Under Run",
+            "Vex 3",
+            "Vex 4",
+            "Vex 5",
+            "Vex 6",
+            "Vex 7",
+            "Volley Random",
+            "Webretro",
+            "World's Hardest Game",
+            "World's Hardest Game 2",
+            "xx142-b2.exe"
+        ];
+
+        function displayGames() {
+            const gameContainer = document.getElementById('gameList');
+            gameContainer.innerHTML = '';
+
+            games.forEach(game => {
+                const gameLink = document.createElement('a');
+                gameLink.href = game.toLowerCase().replace(/[^a-z0-9]+/g, '');
+                gameLink.textContent = game;
+                gameContainer.appendChild(gameLink);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayGames();
+        });
+    </script>
 </head>
 <body>
     <button class="back-button" onclick="location.href='https://o-sshadow.github.io/menu/'">Back</button>
     <div class="heading">
-        <h1>Game Menu</h1>
+        <h1>Tyler's Game Hub</h1>
     </div>
-    <div>
-        <a href="1">1</a>
-        <a href="1v1.lol">1v1.LOL</a>
-        <a href="10minutestilldawn">10 Minutes Till Dawn</a>
-        <a href="2048">2048</a>
-        <a href="adanceoffireandice">A Dance of Fire And Ice</a>
-        <a href="adarkroom">A Dark Room</a>
-        <a href="adrenalinechallenge">Adrenaline Challenge</a>
-        <a href="adventuredrivers">Adventure Drivers</a>
-        <a href="asteroids">Asteroids</a>
-        <a href="astray">Astray</a>
-        <a href="backcountry">Backcountry</a>
-        <a href="badicecream">Bad Ice Cream</a>
-        <a href="badicecream2">Bad Ice Cream 2</a>
-        <a href="badicecream3">Bad Ice Cream 3</a>
-        <a href="basketrandom">Basket Random</a>
-        <a href="bitlife">BitLife</a>
-        <a href="bounceback">Bounceback</a>
-        <a href="boxingrandom">Boxing Random</a>
-        <a href="breaklock">BreakLock</a>
-        <a href="breakout">Breakout</a>
-        <a href="chess">Chess</a>
-        <a href="chromedino">Chrome Dino</a>
-        <a href="connect3">Connect 3</a>
-        <a href="cookieclicker">Cookie Clicker</a>
-        <a href="cubefield">Cubefield</a>
-        <a href="doodlejump">Doodle Jump</a>
-        <a href="ducklife">Duck Life</a>
-        <a href="ducklife2">Duck Life 2</a>
-        <a href="ducklife3">Duck Life 3</a>
-        <a href="ducklife4">Duck Life 4</a>
-        <a href="edgesurf">Edge Surf</a>
-        <a href="evilglitch">Evil Glitch</a>
-        <a href="factoryballsforever">Factory Balls Forever</a>
-        <a href="fireboyandwatergirlintheforesttemple">Fireboy and Watergirl in the Forest Temple</a>
-        <a href="flappybird">Flappy Bird</a>
-        <a href="friendlyfire">Friendly Fire</a>
-        <a href="geometrydash">Geometry Dash</a>
-        <a href="gopherkart">Gopher Kart</a>
-        <a href="hextris">Hextris</a>
-        <a href="iceagebabyadventure">Ice Age Baby Adventure</a>
-        <a href="jumpingfrogspuzzle">Jumping frogs puzzle</a>
-        <a href="konnekt">Konnekt</a>
-        <a href="minecraft0.30">Minecraft 0.30</a>
-        <a href="minecraft1.3">Minecraft 1.3</a>
-        <a href="minecraft1.5.2">Minecraft 1.5.2</a>
-        <a href="motox3m2">Moto X3M 2</a>
-        <a href="ovo">OvO</a>
-        <a href="pacman">Pac-Man</a>
-        <a href="pushback">Pushback</a>
-        <a href="racer">Racer</a>
-        <a href="radiusraid">Radius Raid</a>
-        <a href="retrobowl">Retro Bowl</a>
-        <a href="retrohaunt">Retrohaunt</a>
-        <a href="riddleschool">Riddle School</a>
-        <a href="riddleschool2">Riddle School 2</a>
-        <a href="riddleschool3">Riddle School 3</a>
-        <a href="riddleschool4">Riddle School 4</a>
-        <a href="riddleschool5">Riddle School 5</a>
-        <a href="roadblocks">Roadblocks</a>
-        <a href="sleepingbeauty">Sleeping Beauty</a>
-        <a href="slope">Slope</a>
-        <a href="snake">Snake</a>
-        <a href="snowrider3d">Snow Rider 3D</a>
-        <a href="soccerrandom">Soccer Random</a>
-        <a href="spacecompany">Space Company</a>
-        <a href="spaceinvaders">Space Invaders</a>
-        <a href="tetris">Tetris</a>
-        <a href="thechromaincident">The Chroma Incident</a>
-        <a href="thereisnogame">THERE IS NO GAME!</a>
-        <a href="towermaster">Tower Master</a>
-        <a href="tunnelrush">Tunnel Rush</a>
-        <a href="underrun">Under Run</a>
-        <a href="vex3">Vex 3</a>
-        <a href="vex4">Vex 4</a>
-        <a href="vex5">Vex 5</a>
-        <a href="vex6">Vex 6</a>
-        <a href="vex7">Vex 7</a>
-        <a href="volleyrandom">Volley Random</a>
-        <a href="webretro">Webretro (retro console emulator)</a>
-        <a href="worldshardestgame">World's Hardest Game</a>
-        <a href="worldshardestgame2">World's Hardest Game 2</a>
-        <a href="xx142b2.exe">xx142-b2.exe</a>
+
+    <div class="controls">
+        <input type="text" id="searchBar" placeholder="Search games..." oninput="displayGames()">
     </div>
+
+    <div id="gameList" class="game-list"></div>
+
     <footer>
         <div class="footer">
-            <a href="https://github.com/o-sshadow/menu">Source Code</a>
+            <a href="https://github.com/TylerPalko/gamehub">Source Code</a>
+            <a href="https://www.youtube.com/channel/UC8Sz_LcrkLErkxXbWKlW59A">My Youtube</a>
+            <a href="bitcoin:bc1q5072l0wec75kvatudg3qh8zxk40dmem0d0zu0kzszemxc87qqv9s9z608y">Donate BTC</a>
         </div>
     </footer>
 </body>
