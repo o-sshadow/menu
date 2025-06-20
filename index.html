@@ -3,241 +3,608 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>o-sshadow's Game Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            background-color: #000; /* Black background */
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            background-attachment: fixed;
             margin: 0;
             padding: 20px;
-            color: #fff; /* Default text color */
+            color: #fff;
+            min-height: 100vh;
         }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
         h1 {
             text-align: center;
-            color: #007BFF;
-            font-weight: bold; /* Bold text for the title */
+            background: linear-gradient(45deg, #4FC3F7, #29B6F6, #03A9F4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 8px rgba(79, 195, 247, 0.3);
         }
-        div {
-            margin-bottom: 20px;
+        
+        .section {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
+        
         label {
-            margin-right: 10px;
-            font-weight: bold;
-            color: #fff; /* White color for labels */
-        }
-        input[type="text"], select {
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            margin-right: 15px;
+            font-weight: 600;
+            color: #E3F2FD;
             font-size: 16px;
         }
+        
+        #searchBar {
+            padding: 12px 20px;
+            margin-right: 10px;
+            border: 2px solid rgba(79, 195, 247, 0.3);
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            width: 300px;
+        }
+        
+        #searchBar:focus {
+            outline: none;
+            border-color: #4FC3F7;
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        #searchBar::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
         #categoryContainer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
         }
+        
         .category {
-            padding: 10px;
-            border-radius: 5px;
-            background: linear-gradient(to bottom, #f0f0f0, #d9d9d9); /* Gradient background */
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            flex: 1 1 150px; /* Adjusts the size of the category boxes */
-            font-weight: bold; /* Bold text for categories */
-            color: black; /* Black text for categories */
+            font-weight: 600;
+            color: #E3F2FD;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .category:hover::before {
+            left: 100%;
+        }
+        
         .category:hover {
-            background: linear-gradient(to bottom, #e0e0e0, #c9c9c9); /* Darker gradient on hover */
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(79, 195, 247, 0.3);
+            border-color: rgba(79, 195, 247, 0.5);
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.2), rgba(79, 195, 247, 0.1));
         }
+        
+        .category.selected {
+            background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(79, 195, 247, 0.4);
+            transform: translateY(-2px);
+        }
+        
         #gameList {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
         }
+        
         #gameList a {
             display: block;
-            padding: 10px;
+            padding: 20px;
             text-decoration: none;
-            color: black; /* Black text for games */
-            background: linear-gradient(to bottom, #f0f0f0, #d9d9d9); /* Gradient background */
-            border-radius: 5px;
-            width: 150px; /* Fixed width for game boxes */
+            color: #E3F2FD;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
             text-align: center;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
         }
+        
+        #gameList a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(29, 182, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        #gameList a:hover::before {
+            opacity: 1;
+        }
+        
         #gameList a:hover {
-            background: linear-gradient(to bottom, #e0e0e0, #c9c9c9); /* Darker gradient on hover */
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
-            text-decoration: none;
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(79, 195, 247, 0.3);
+            border-color: rgba(79, 195, 247, 0.5);
+            color: #fff;
         }
+        
         #gameList p {
-            color: #999;
+            color: rgba(255, 255, 255, 0.6);
             text-align: center;
             width: 100%;
+            font-size: 18px;
+            margin: 40px 0;
+        }
+        
+        /* Enhanced Drawer styles */
+        #drawerBtn {
+            background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0 auto 30px auto;
+            display: block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #drawerBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        #drawerBtn:hover::before {
+            left: 100%;
+        }
+        
+        #drawerBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(79, 195, 247, 0.4);
+        }
+        
+        #drawerOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        #drawer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 450px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+            backdrop-filter: blur(20px);
+            color: #1a1a2e;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            padding: 40px 32px 32px 32px;
+            animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        #drawer .alert {
+            background: linear-gradient(135deg, #ff5252, #f44336);
+            color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 28px;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: 0 8px 25px rgba(255, 82, 82, 0.3);
+        }
+        
+        #drawer .info {
+            text-align: center;
+            margin-bottom: 28px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a2e;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(29, 182, 246, 0.1));
+            border-radius: 12px;
+            border: 2px solid rgba(79, 195, 247, 0.2);
+        }
+        
+        #drawer .open-link {
+            text-align: center;
+        }
+        
+        #drawer .open-link a {
+            background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+            color: #fff;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.3);
+        }
+        
+        #drawer .open-link a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(79, 195, 247, 0.4);
+        }
+        
+        #closeDrawer {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #closeDrawer:hover {
+            background: rgba(255, 82, 82, 0.1);
+            color: #ff5252;
+            transform: rotate(90deg);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { 
+                transform: translateX(-50%) translateY(-100%);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            #searchBar {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            #categoryContainer {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 12px;
+            }
+            
+            #gameList {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #29B6F6, #03A9F4);
         }
     </style>
 </head>
 <body>
-<h1>Game Menu</h1>
-<div>
-    <label for="searchBar">Search: </label>
-    <input type="text" id="searchBar" placeholder="Type to search...">
-</div>
-<div id="categoryContainer">
-    <div class="category" data-value="All">All</div>
-    <div class="category" data-value="Shooting">Shooting</div>
-    <div class="category" data-value="Survival">Survival</div>
-    <div class="category" data-value="Puzzle">Puzzle</div>
-    <div class="category" data-value="Rhythm">Rhythm</div>
-    <div class="category" data-value="Adventure">Adventure</div>
-    <div class="category" data-value="Action">Action</div>
-    <div class="category" data-value="Racing">Racing</div>
-    <div class="category" data-value="Arcade">Arcade</div>
-    <div class="category" data-value="Strategy">Strategy</div>
-    <div class="category" data-value="Endless Runner">Endless Runner</div>
-    <div class="category" data-value="Idle">Idle</div>
-    <div class="category" data-value="Simulation">Simulation</div>
-    <div class="category" data-value="Co-op">Co-op</div>
-    <div class="category" data-value="Horror">Horror</div>
-    <div class="category" data-value="Emulator">Emulator</div>
-    <div class="category" data-value="Executable">Executable</div>
-</div>
-<div id="gameList"></div>
+    <div class="container">
+        <h1>o-sshadow's Game Menu</h1>
+        
+        <!-- Drawer Button -->
+        <button id="drawerBtn">New Proxy</button>
+        
+        <!-- Drawer -->
+        <div id="drawerOverlay"></div>
+        <div id="drawer">
+            <div class="alert">Once you open the link wait 1 minute then refresh (Beta)</div>
+            <div class="info">prox.pandapvp.net</div>
+            <div class="open-link">
+                <a href="https://prox.pandapvp.net" target="_blank" rel="noopener">Open Link</a>
+            </div>
+            <button id="closeDrawer">&times;</button>
+        </div>
+        
+        <!-- Search Section -->
+        <div class="section">
+            <label for="searchBar">Search Games:</label>
+            <input type="text" id="searchBar" placeholder="Type to search games...">
+        </div>
+        
+        <!-- Categories Section -->
+        <div class="section">
+            <div id="categoryContainer">
+                <div class="category" data-value="All">All</div>
+                <div class="category" data-value="Shooting">Shooting</div>
+                <div class="category" data-value="Survival">Survival</div>
+                <div class="category" data-value="Puzzle">Puzzle</div>
+                <div class="category" data-value="Rhythm">Rhythm</div>
+                <div class="category" data-value="Adventure">Adventure</div>
+                <div class="category" data-value="Action">Action</div>
+                <div class="category" data-value="Racing">Racing</div>
+                <div class="category" data-value="Arcade">Arcade</div>
+                <div class="category" data-value="Strategy">Strategy</div>
+                <div class="category" data-value="Endless Runner">Endless Runner</div>
+                <div class="category" data-value="Idle">Idle</div>
+                <div class="category" data-value="Simulation">Simulation</div>
+                <div class="category" data-value="Co-op">Co-op</div>
+                <div class="category" data-value="Horror">Horror</div>
+                <div class="category" data-value="Emulator">Emulator</div>
+                <div class="category" data-value="Executable">Executable</div>
+            </div>
+        </div>
+        
+        <!-- Games Section -->
+        <div class="section">
+            <div id="gameList"></div>
+        </div>
+    </div>
 
-<script>
-    const games = [
-        { name: "1v1.LOL", url: "1v1.lol", category: "Shooting" },
-        { name: "10 Minutes Till Dawn", url: "10minutestilldawn", category: "Survival" },
-        { name: "2048", url: "2048", category: "Puzzle" },
-        { name: "A Dance of Fire And Ice", url: "adanceoffireandice", category: "Rhythm" },
-        { name: "A Dark Room", url: "adarkroom", category: "Adventure" },
-        { name: "Adrenaline Challenge", url: "adrenalinechallenge", category: "Action" },
-        { name: "Adventure Drivers", url: "adventuredrivers", category: "Racing" },
-        { name: "Asteroids", url: "asteroids", category: "Arcade" },
-        { name: "Astray", url: "astray", category: "Adventure" },
-        { name: "Backcountry", url: "backcountry", category: "Adventure" },
-        { name: "Bad Ice Cream", url: "badicecream", category: "Puzzle" },
-        { name: "Bad Ice Cream 2", url: "badicecream2", category: "Puzzle" },
-        { name: "Bad Ice Cream 3", url: "badicecream3", category: "Puzzle" },
-        { name: "Basket Random", url: "basketrandom", category: "Sports" },
-        { name: "BitLife", url: "bitlife", category: "Simulation" },
-        { name: "Bounceback", url: "bounceback", category: "Action" },
-        { name: "Boxing Random", url: "boxingrandom", category: "Sports" },
-        { name: "BreakLock", url: "breaklock", category: "Puzzle" },
-        { name: "Breakout", url: "breakout", category: "Arcade" },
-        { name: "Chess", url: "chess", category: "Strategy" },
-        { name: "Chrome Dino", url: "chromedino", category: "Endless Runner" },
-        { name: "Connect 3", url: "connect3", category: "Puzzle" },
-        { name: "Cookie Clicker", url: "cookieclicker", category: "Idle" },
-        { name: "Cubefield", url: "cubefield", category: "Arcade" },
-        { name: "Doodle Jump", url: "doodlejump", category: "Platformer" },
-        { name: "Duck Life", url: "ducklife", category: "Simulation" },
-        { name: "Duck Life 2", url: "ducklife2", category: "Simulation" },
-        { name: "Duck Life 3", url: "ducklife3", category: "Simulation" },
-        { name: "Duck Life 4", url: "ducklife4", category: "Simulation" },
-        { name: "Edge Surf", url: "edgesurf", category: "Endless Runner" },
-        { name: "Evil Glitch", url: "evilglitch", category: "Puzzle" },
-        { name: "Factory Balls Forever", url: "factoryballsforever", category: "Puzzle" },
-        { name: "Fireboy and Watergirl in the Forest Temple", url: "fireboyandwatergirlintheforesttemple", category: "Co-op" },
-        { name: "Flappy Bird", url: "flappybird", category: "Endless Runner" },
-        { name: "Friendly Fire", url: "friendlyfire", category: "Action" },
-        { name: "Geometry Dash", url: "geometrydash", category: "Platformer" },
-        { name: "Gopher Kart", url: "gopherkart", category: "Racing" },
-        { name: "Hextris", url: "hextris", category: "Puzzle" },
-        { name: "Ice Age Baby Adventure", url: "iceagebabyadventure", category: "Adventure" },
-        { name: "Jumping Frogs Puzzle", url: "jumpingfrogspuzzle", category: "Puzzle" },
-        { name: "Konnekt", url: "konnekt", category: "Puzzle" },
-        { name: "Minecraft 0.30", url: "minecraft0.30", category: "Sandbox" },
-        { name: "Minecraft 1.3", url: "minecraft1.3", category: "Sandbox" },
-        { name: "Minecraft 1.5.2", url: "minecraft1.5.2", category: "Sandbox" },
-        { name: "Moto X3M 2", url: "motox3m2", category: "Racing" },
-        { name: "OvO", url: "ovo", category: "Platformer" },
-        { name: "Pac-Man", url: "pacman", category: "Arcade" },
-        { name: "Pushback", url: "pushback", category: "Action" },
-        { name: "Racer", url: "racer", category: "Racing" },
-        { name: "Radius Raid", url: "radiusraid", category: "Action" },
-        { name: "Retro Bowl", url: "retrobowl", category: "Sports" },
-        { name: "Retrohaunt", url: "retrohaunt", category: "Horror" },
-        { name: "Riddle School", url: "riddleschool", category: "Puzzle" },
-        { name: "Riddle School 2", url: "riddleschool2", category: "Puzzle" },
-        { name: "Riddle School 3", url: "riddleschool3", category: "Puzzle" },
-        { name: "Riddle School 4", url: "riddleschool4", category: "Puzzle" },
-        { name: "Riddle School 5", url: "riddleschool5", category: "Puzzle" },
-        { name: "Roadblocks", url: "roadblocks", category: "Puzzle" },
-        { name: "Sleeping Beauty", url: "sleepingbeauty", category: "Adventure" },
-        { name: "Slope", url: "slope", category: "Racing" },
-        { name: "Snake", url: "snake", category: "Arcade" },
-        { name: "Snow Rider 3D", url: "snowrider3d", category: "Racing" },
-        { name: "Soccer Random", url: "soccerrandom", category: "Sports" },
-        { name: "Space Company", url: "spacecompany", category: "Simulation" },
-        { name: "Space Invaders", url: "spaceinvaders", category: "Arcade" },
-        { name: "Tetris", url: "tetris", category: "Puzzle" },
-        { name: "The Chroma Incident", url: "thechromaincident", category: "Adventure" },
-        { name: "THERE IS NO GAME!", url: "thereisnogame", category: "Adventure" },
-        { name: "Tower Master", url: "towermaster", category: "Strategy" },
-        { name: "Tunnel Rush", url: "tunnelrush", category: "Endless Runner" },
-        { name: "Under Run", url: "underrun", category: "Action" },
-        { name: "Vex 3", url: "vex3", category: "Platformer" },
-        { name: "Vex 4", url: "vex4", category: "Platformer" },
-        { name: "Vex 5", url: "vex5", category: "Platformer" },
-        { name: "Vex 6", url: "vex6", category: "Platformer" },
-        { name: "Vex 7", url: "vex7", category: "Platformer" },
-        { name: "Volley Random", url: "volleyrandom", category: "Sports" },
-        { name: "Webretro (retro console emulator)", url: "webretro", category: "Emulator" },
-        { name: "World's Hardest Game", url: "worldshardestgame", category: "Puzzle" },
-        { name: "World's Hardest Game 2", url: "worldshardestgame2", category: "Puzzle" },
-        { name: "xx142-b2.exe", url: "xx142b2 .exe", category: "Executable" },
-    ];
+    <script>
+        const games = [
+            { name: "1v1.LOL", url: "1v1.lol", category: "Shooting" },
+            { name: "10 Minutes Till Dawn", url: "10minutestilldawn", category: "Survival" },
+            { name: "2048", url: "2048", category: "Puzzle" },
+            { name: "A Dance of Fire And Ice", url: "adanceoffireandice", category: "Rhythm" },
+            { name: "A Dark Room", url: "adarkroom", category: "Adventure" },
+            { name: "Adrenaline Challenge", url: "adrenalinechallenge", category: "Action" },
+            { name: "Adventure Drivers", url: "adventuredrivers", category: "Racing" },
+            { name: "Asteroids", url: "asteroids", category: "Arcade" },
+            { name: "Astray", url: "astray", category: "Adventure" },
+            { name: "Backcountry", url: "backcountry", category: "Adventure" },
+            { name: "Bad Ice Cream", url: "badicecream", category: "Puzzle" },
+            { name: "Bad Ice Cream 2", url: "badicecream2", category: "Puzzle" },
+            { name: "Bad Ice Cream 3", url: "badicecream3", category: "Puzzle" },
+            { name: "Basket Random", url: "basketrandom", category: "Sports" },
+            { name: "BitLife", url: "bitlife", category: "Simulation" },
+            { name: "Bounceback", url: "bounceback", category: "Action" },
+            { name: "Boxing Random", url: "boxingrandom", category: "Sports" },
+            { name: "BreakLock", url: "breaklock", category: "Puzzle" },
+            { name: "Breakout", url: "breakout", category: "Arcade" },
+            { name: "Chess", url: "chess", category: "Strategy" },
+            { name: "Chrome Dino", url: "chromedino", category: "Endless Runner" },
+            { name: "Connect 3", url: "connect3", category: "Puzzle" },
+            { name: "Cookie Clicker", url: "cookieclicker", category: "Idle" },
+            { name: "Cubefield", url: "cubefield", category: "Arcade" },
+            { name: "Doodle Jump", url: "doodlejump", category: "Platformer" },
+            { name: "Duck Life", url: "ducklife", category: "Simulation" },
+            { name: "Duck Life 2", url: "ducklife2", category: "Simulation" },
+            { name: "Duck Life 3", url: "ducklife3", category: "Simulation" },
+            { name: "Duck Life 4", url: "ducklife4", category: "Simulation" },
+            { name: "Edge Surf", url: "edgesurf", category: "Endless Runner" },
+            { name: "Evil Glitch", url: "evilglitch", category: "Puzzle" },
+            { name: "Factory Balls Forever", url: "factoryballsforever", category: "Puzzle" },
+            { name: "Fireboy and Watergirl in the Forest Temple", url: "fireboyandwatergirlintheforesttemple", category: "Co-op" },
+            { name: "Flappy Bird", url: "flappybird", category: "Endless Runner" },
+            { name: "Friendly Fire", url: "friendlyfire", category: "Action" },
+            { name: "Geometry Dash", url: "geometrydash", category: "Platformer" },
+            { name: "Gopher Kart", url: "gopherkart", category: "Racing" },
+            { name: "Hextris", url: "hextris", category: "Puzzle" },
+            { name: "Ice Age Baby Adventure", url: "iceagebabyadventure", category: "Adventure" },
+            { name: "Jumping Frogs Puzzle", url: "jumpingfrogspuzzle", category: "Puzzle" },
+            { name: "Konnekt", url: "konnekt", category: "Puzzle" },
+            { name: "Minecraft 0.30", url: "minecraft0.30", category: "Sandbox" },
+            { name: "Minecraft 1.3", url: "minecraft1.3", category: "Sandbox" },
+            { name: "Minecraft 1.5.2", url: "minecraft1.5.2", category: "Sandbox" },
+            { name: "Moto X3M 2", url: "motox3m2", category: "Racing" },
+            { name: "OvO", url: "ovo", category: "Platformer" },
+            { name: "Pac-Man", url: "pacman", category: "Arcade" },
+            { name: "Pushback", url: "pushback", category: "Action" },
+            { name: "Racer", url: "racer", category: "Racing" },
+            { name: "Radius Raid", url: "radiusraid", category: "Action" },
+            { name: "Retro Bowl", url: "retrobowl", category: "Sports" },
+            { name: "Retrohaunt", url: "retrohaunt", category: "Horror" },
+            { name: "Riddle School", url: "riddleschool", category: "Puzzle" },
+            { name: "Riddle School 2", url: "riddleschool2", category: "Puzzle" },
+            { name: "Riddle School 3", url: "riddleschool3", category: "Puzzle" },
+            { name: "Riddle School 4", url: "riddleschool4", category: "Puzzle" },
+            { name: "Riddle School 5", url: "riddleschool5", category: "Puzzle" },
+            { name: "Roadblocks", url: "roadblocks", category: "Puzzle" },
+            { name: "Sleeping Beauty", url: "sleepingbeauty", category: "Adventure" },
+            { name: "Slope", url: "slope", category: "Racing" },
+            { name: "Snake", url: "snake", category: "Arcade" },
+            { name: "Snow Rider 3D", url: "snowrider3d", category: "Racing" },
+            { name: "Soccer Random", url: "soccerrandom", category: "Sports" },
+            { name: "Space Company", url: "spacecompany", category: "Simulation" },
+            { name: "Space Invaders", url: "spaceinvaders", category: "Arcade" },
+            { name: "Tetris", url: "tetris", category: "Puzzle" },
+            { name: "The Chroma Incident", url: "thechromaincident", category: "Adventure" },
+            { name: "THERE IS NO GAME!", url: "thereisnogame", category: "Adventure" },
+            { name: "Tower Master", url: "towermaster", category: "Strategy" },
+            { name: "Tunnel Rush", url: "tunnelrush", category: "Endless Runner" },
+            { name: "Under Run", url: "underrun", category: "Action" },
+            { name: "Vex 3", url: "vex3", category: "Platformer" },
+            { name: "Vex 4", url: "vex4", category: "Platformer" },
+            { name: "Vex 5", url: "vex5", category: "Platformer" },
+            { name: "Vex 6", url: "vex6", category: "Platformer" },
+            { name: "Vex 7", url: "vex7", category: "Platformer" },
+            { name: "Volley Random", url: "volleyrandom", category: "Sports" },
+            { name: "Webretro (retro console emulator)", url: "webretro", category: "Emulator" },
+            { name: "World's Hardest Game", url: "worldshardestgame", category: "Puzzle" },
+            { name: "World's Hardest Game 2", url: "worldshardestgame2", category: "Puzzle" },
+            { name: "xx142-b2.exe", url: "xx142b2 .exe", category: "Executable" },
+        ];
 
-    function filterGames() {
-        const category = document.querySelector('.category.selected')?.dataset.value || "All";
-        const searchQuery = document.getElementById('searchBar').value.toLowerCase();
+        function filterGames() {
+            const category = document.querySelector('.category.selected')?.dataset.value || "All";
+            const searchQuery = document.getElementById('searchBar').value.toLowerCase();
 
-        const filteredGames = games.filter(game => {
-            const matchesCategory = category === "All" || game.category === category;
-            const matchesSearch = game.name.toLowerCase().includes(searchQuery);
-            return matchesCategory && matchesSearch;
-        });
+            const filteredGames = games.filter(game => {
+                const matchesCategory = category === "All" || game.category === category;
+                const matchesSearch = game.name.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
 
-        displayGames(filteredGames);
-    }
-
-    function displayGames(gameList) {
-        const gameContainer = document.getElementById('gameList');
-        gameContainer.innerHTML = '';
-
-        if (gameList.length === 0) {
-            gameContainer.innerHTML = '<p>No games found.</p>';
-            return;
+            displayGames(filteredGames);
         }
 
-        gameList.forEach(game => {
-            const gameLink = document.createElement('a');
-            gameLink.href = game.url;
-            gameLink.textContent = game.name;
-            gameContainer.appendChild(gameLink);
-        });
-    }
+        function displayGames(gameList) {
+            const gameContainer = document.getElementById('gameList');
+            gameContainer.innerHTML = '';
 
-    document.addEventListener('DOMContentLoaded', () => {
-        displayGames(games);
-        document.querySelectorAll('.category').forEach(category => {
-            category.addEventListener('click', function() {
-                document.querySelectorAll('.category').forEach(cat => cat.classList.remove('selected'));
-                this.classList.add('selected');
-                filterGames();
+            if (gameList.length === 0) {
+                gameContainer.innerHTML = '<p>No games found matching your criteria.</p>';
+                return;
+            }
+
+            gameList.forEach(game => {
+                const gameLink = document.createElement('a');
+                gameLink.href = game.url;
+                gameLink.textContent = game.name;
+                gameContainer.appendChild(gameLink);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayGames(games);
+            
+            // Set "All" as selected by default
+            document.querySelector('.category[data-value="All"]').classList.add('selected');
+            
+            document.querySelectorAll('.category').forEach(category => {
+                category.addEventListener('click', function() {
+                    document.querySelectorAll('.category').forEach(cat => cat.classList.remove('selected'));
+                    this.classList.add('selected');
+                    filterGames();
+                });
+            });
+            
+            document.getElementById('searchBar').addEventListener('input', filterGames);
+
+            // Enhanced Drawer logic with animations
+            const drawerBtn = document.getElementById('drawerBtn');
+            const drawer = document.getElementById('drawer');
+            const drawerOverlay = document.getElementById('drawerOverlay');
+            const closeDrawer = document.getElementById('closeDrawer');
+
+            function openDrawer() {
+                drawer.style.display = 'block';
+                drawerOverlay.style.display = 'block';
+                requestAnimationFrame(() => {
+                    drawer.style.animation = 'slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    drawerOverlay.style.animation = 'fadeIn 0.3s ease';
+                });
+            }
+            
+            function closeDrawerFunc() {
+                drawer.style.animation = 'slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) reverse';
+                drawerOverlay.style.animation = 'fadeIn 0.2s ease reverse';
+                setTimeout(() => {
+                    drawer.style.display = 'none';
+                    drawerOverlay.style.display = 'none';
+                }, 300);
+            }
+            
+            drawerBtn.addEventListener('click', openDrawer);
+            closeDrawer.addEventListener('click', closeDrawerFunc);
+            drawerOverlay.addEventListener('click', closeDrawerFunc);
+            
+            // Close drawer with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && drawer.style.display === 'block') {
+                    closeDrawerFunc();
+                }
             });
         });
-        document.getElementById('searchBar').addEventListener('input', filterGames);
-    });
-</script>
+    </script>
 </body>
 </html>
